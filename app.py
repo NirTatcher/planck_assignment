@@ -1,11 +1,8 @@
 import time
 
 from flask import Flask,request;
-from time import *
-import threading
 import requests
 import json
-import schedule
 import datetime
 
 def getDish(dishId):
@@ -19,15 +16,7 @@ def getDish(dishId):
                     res = {'id': dish['dishId'], 'name': dish['dishName'], 'description': dish['dishDescription'],
                            'price': dish['dishPrice']}
     return res
-                                # all_category.append(
-                #     {'id': dish['dishId'], 'name': dish['dishName'], 'description': dish['dishDescription'],
-                #      'price': dish['dishPrice']})
 
-def setSchedule():
-    schedule.every(86400).seconds.do(myInterval)
-    while True:
-        schedule.run_pending()
-        sleep(1)
 def getCategoty(c_name):
     all_category=[]
     for i in range(0, len(arcaffe_content['categoriesList'])):
@@ -40,11 +29,16 @@ def getCategoty(c_name):
     return all_category
 
 def checkDate():
-    if(date != datetime.datetime.now()):
+    global date
+    print(str(date) +" = " + str(datetime.datetime.now().date()))
+    timeNow = datetime.datetime.now().date()
+    if(date != timeNow):
         x = requests.get(
             'https://www.10bis.co.il/NextApi/GetRestaurantMenu?culture=en&uiCulture=en&restaurantId=19156&deliveryMethod=pickup')
         global arcaffe_content
         arcaffe_content = x.json()['Data']
+        date = timeNow
+
 global x
 x = requests.get(
     'https://www.10bis.co.il/NextApi/GetRestaurantMenu?culture=en&uiCulture=en&restaurantId=19156&deliveryMethod=pickup')
@@ -52,7 +46,7 @@ global arcaffe_content
 arcaffe_content= x.json()['Data']
 
 global date
-date = datetime.datetime.now()
+date = datetime.datetime.now().date()
 
 
 app = Flask(__name__)
