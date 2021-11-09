@@ -7,24 +7,6 @@ import requests
 import json
 import schedule
 import datetime
-# def myInterval():
-#     x = requests.get(
-#         'https://www.10bis.co.il/NextApi/GetRestaurantMenu?culture=en&uiCulture=en&restaurantId=19156&deliveryMethod=pickup')
-#
-#     print("getting info again...")
-#     return x
-
-# def countdown():
-#
-#     #86400 daily seconds
-#     global my_timer
-#     my_timer = 10
-#     for x in range(10):
-#         my_timer=my_timer-1
-#         print("1 sec passed")
-#         sleep(1)
-#     print("Getting info...")
-
 
 def getDish(dishId):
     res=""
