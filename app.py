@@ -31,13 +31,13 @@ def getCategoty(c_name):
 def checkDate():
     global date
     print(str(date) +" = " + str(datetime.datetime.now().date()))
-    timeNow = datetime.datetime.now().date()
-    if(date != timeNow):
+    dateNow = datetime.datetime.now().date()
+    if(date != dateNow):
         x = requests.get(
             'https://www.10bis.co.il/NextApi/GetRestaurantMenu?culture=en&uiCulture=en&restaurantId=19156&deliveryMethod=pickup')
         global arcaffe_content
         arcaffe_content = x.json()['Data']
-        date = timeNow
+        date = dateNow
 
 global x
 x = requests.get(
